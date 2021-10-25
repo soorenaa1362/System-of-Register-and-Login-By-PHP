@@ -45,5 +45,49 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
 
+        <!-- Sweet Alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <?php if($_GET['registerSuccess'] == true){ ?>
+            <script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'کد فعالسازی ارسال شد!'
+                })
+            </script>
+        <?php } ?>
+
+        <?php if($errorToken){ ?>
+            <script>
+                Swal.fire(
+                    'لطفا دقت کنید!',
+                    'کد وارد شده اشتباه است!',
+                    'warning'
+                )
+            </script>
+        <?php } ?>
+
+        <?php if($_GET['noActive'] == true){ ?>
+            <script>
+                Swal.fire(
+                    'دقت داشته باشید!',
+                    'ابتدا باید پنل خود را فعال کنید!',
+                    'warning'
+                )
+            </script>
+        <?php } ?>
+
     </body>
 </html>

@@ -56,5 +56,18 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
 
+        <!-- Sweet Alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <?php if($errorPassword){ ?>
+            <script>
+                Swal.fire(
+                    'لطفا دقت کنید!',
+                    'رمز عبور با تکرار آن برابر نیست!',
+                    'warning'
+                )
+            </script>
+        <?php } ?>
+
     </body>
 </html>

@@ -60,6 +60,39 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
 
+        <!-- Sweet Alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <?php if($_GET['activeSuccess'] == true){ ?>
+            <script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'پنل کاربری فعال شد!'
+                })
+            </script>
+        <?php } ?>
+
+        <?php if($errorLogin){ ?>
+            <script>
+                Swal.fire(
+                    'لطفا دقت کنید!',
+                    'کاربری با این مشخصات در سیستم ثبت نشده است!',
+                    'warning'
+                )
+            </script>
+        <?php } ?>
         
     </body>
 </html>

@@ -2,6 +2,9 @@
 
 // Register
 
+    $registerSuccess = null;
+    $errorPassword = null;
+
     if(isset($_POST['register']))
     {
         $username = $_POST['username'];
@@ -20,12 +23,18 @@
             $result->bindValue(5, $token);
             $result->execute();
 
-            header('Location:token.php');
+            $registerSuccess = true;
+            header('Location:token.php?registerSuccess=true');
+        }else{
+            $errorPassword = true;
         }
     }
 
 
 // Token
+
+    $activeSuccess = null;
+    $errorToken = null;
 
     if(isset($_POST['inserToken']))
     {
@@ -42,12 +51,19 @@
         $result->execute();
 
         if($result->rowCount() > 0){
-            header('Location:login.php');
+            $activeSuccess = true;
+            header('Location:login.php?activeSuccess=true');
+        }else{
+            $errorToken = true;
         }
     }
 
 
 // Login
+
+    $loginSuccess = null;
+    $errorLogin = null;
+    $noActive = null;
 
     if(isset($_POST['login']))
     {
@@ -71,12 +87,13 @@
             $_SESSION['status'] = $rows['status'];
 
             if($rows['status'] == 1){
-                header('Location:index.php');
+                $loginSuccess = true;
+                header('Location:index.php?loginSuccess=true');
             }else{
-                header('Location:token.php');
+                $noActive = true;
+                header('Location:token.php?noActive=true');
             }
-
         }else{
-            echo "کاربری با این مشخصات در سیستم ثبت نشده است. لطفا دوباره تلاش کنید!";
+            $errorLogin = true;
         }
     }
